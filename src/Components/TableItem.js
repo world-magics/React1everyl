@@ -29,8 +29,8 @@ const TableItem = (props) => {
             <td>{props.post.emailAddress}</td>
             
             <td>
-              <button className='btn btn-outline-danger'>Delete</button>
-              <button className='btn btn-outline-success mx-3'>Edit</button>
+              <button disabled className='btn btn-outline-danger'>Delete</button>
+              <button disabled className='btn btn-outline-success mx-3'>Edit</button>
             </td>
           </tr>
    
