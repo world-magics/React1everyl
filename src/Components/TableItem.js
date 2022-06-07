@@ -6,7 +6,7 @@ const TableItem = (props) => {
     
         //   <tr>
         //     <td>1</td>
-        //     <td>{props.name}</td>
+        //     <td>{props.firstname}</td>
         //     <td>{props.surname}</td>
         //     <td>{props.jobs}</td>
         //     <td>{props.years}</td>
@@ -20,16 +20,16 @@ const TableItem = (props) => {
         //     </td>
         //   </tr>
           <tr>
-            <td>{props.post.id}</td>
-            <td>{props.post.name}</td>
-            <td>{props.post.surname}</td>
-            <td>{props.post.jobs}</td>
-            <td>{props.post.years}</td>
-            <td>{props.post.address}</td>
-            <td>{props.post.emailAddress}</td>
+            <td>{props.number}</td>
+            <td>{props.inform.firstname}</td>
+            <td>{props.inform.surname}</td>
+            <td>{props.inform.jobs}</td>
+            <td>{props.inform.years}</td>
+            <td>{props.inform.address}</td>
+            <td>{props.inform.emailAddress}</td>
             
             <td>
-              <button disabled className='btn btn-outline-danger'>Delete</button>
+              <button onClick={()=>props.remove(props.inform)}  className='btn btn-outline-danger'>Delete</button>
               <button disabled className='btn btn-outline-success mx-3'>Edit</button>
             </td>
           </tr>

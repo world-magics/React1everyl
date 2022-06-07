@@ -2,7 +2,7 @@ import React from 'react'
 import TableHeader from './TableHeader'
 import TableItem from './TableItem'
 
-const TableList = ({posts,title}) => {
+const TableList = ({informse,title,remove}) => {
   return (
       <>
       <h2 className='text-center text-primary my-4'>{title}</h2>
@@ -11,7 +11,7 @@ const TableList = ({posts,title}) => {
       <TableHeader/>
         </thead>
         <tbody>
-      {/* <TableItem name={"Azim"} 
+      {/* <TableItem firstname={"Azim"} 
        surname={"Fozilov"}
        jobs={"Assistent"}
        years={"35"}
@@ -37,7 +37,7 @@ const TableList = ({posts,title}) => {
     emailAddress={"office1grayasoft@gmail.com"}/> */}
       {/* Object send another js begin */}
       {/* <TableItem 
-      post={{
+      inform={{
           id:1,
           name:"Durdona",
           surname:"Salimova",
@@ -48,8 +48,8 @@ const TableList = ({posts,title}) => {
         /> */}
         {/* Object send another js end */}
 
-        {posts.map(post=>(
-            <TableItem post={post} key={post.id}/>
+        {informse.map((inform,index)=>(
+            <TableItem remove={remove} number={index+1} inform={inform} key={inform.id}/>
             
             ))}
         </tbody>
