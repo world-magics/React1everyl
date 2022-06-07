@@ -37,7 +37,7 @@ function App() {
       setInforms(informs.filter(s=>s.id!==inform.id))
   }
   const [select,setSelect]=useState('');
-
+  const [search,setSearch]=useState('');
   // const addPost=(e)=>{
   //   e.preventDefault();
   //   const newPost={
@@ -57,16 +57,32 @@ function App() {
     // setEmailAddress("");
     // console.log(name);
   // }
+  function getSortedInform(){
+    console.log("first")
+    if(select){
+      return [...informs].sort((a,b)=>a[select].localeCompare(b[select]));
+    }
+    return informs;
+  }
+  const sortedInform=getSortedInform();
   const sortSelect=(sort)=>{
     setSelect(sort);
     // console.log(sort);
     setInforms([...informs].sort((a,b)=>a[sort].localeCompare(b[sort])))
+    // setInforms([...informs].sort((a,b)=>a[sort].localeCompare(b[sort])))
+
   }
   return (
     <>
     <div className="app px-3 my-5 ">
       <InformForm createInform={createInform}/>
-      <div className='d-flex flex-row-reverse my-3 text-right'>
+      <div className='d-flex justify-content-between align-items-center my-3 text-right'>
+        <MyInput 
+        placeholder="Search for type..."
+        value={search}
+        onChange={e=>setSearch(e.target.value)}
+
+        />
          <MySelect 
          value={select}
          onChange={sortSelect}
@@ -78,7 +94,7 @@ function App() {
          />
       </div>
       {informs.length?
-      <TableList remove={removeInform} informse={informs} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
+      <TableList remove={removeInform} informse={sortedInform} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
       :
       <h2 className='text-center my-5 text-danger'>Worker inform don't found!.</h2>
       }

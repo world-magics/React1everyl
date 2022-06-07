@@ -4,7 +4,7 @@ const MySelect = ({options,defaultValues,onChange,value}) => {
   return (
 
       <select 
-      className='form-control my-3'
+      className='form-control my-3 w-25'
     value={value}
     onChange={e=>onChange(e.target.value)}
     >
