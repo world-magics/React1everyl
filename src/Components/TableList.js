@@ -3,6 +3,11 @@ import TableHeader from './TableHeader'
 import TableItem from './TableItem'
 
 const TableList = ({informse,title,remove}) => {
+  if(!informse.length){
+    return (
+      <h2 className='text-center my-5 text-danger'>Worker inform don't found!.</h2>
+    )
+  }
   return (
       <>
       <h2 className='text-center text-primary my-4'>{title}</h2>

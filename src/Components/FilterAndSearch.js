@@ -1,17 +1,19 @@
 import React from 'react'
+import MyInput from './UI/input/MyInput'
+import MySelect from './UI/select/MySelect'
 
-export const FilterAndSearch = () => {
+export const FilterAndSearch = ({filter,setFilter}) => {
   return (
     <div className='d-flex justify-content-between align-items-center my-3 text-right'>
         <MyInput 
         placeholder="Search for type..."
-        value={search}
-        onChange={e=>setSearch(e.target.value)}
+        value={filter.query}
+        onChange={e=>setFilter({...filter,query:e.target.value})}
 
         />
-         <MySelect 
-         value={select}
-         onChange={sortSelect}
+         <MySelect
+         value={filter.sort}
+         onChange={selected=>setFilter({...filter,sort:selected})}
          defaultValues="Sorted by"
          options={[
            {value:"firstname",name:'Firstnames'},

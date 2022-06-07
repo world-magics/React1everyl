@@ -1,6 +1,7 @@
 import React,{useState,useRef, useMemo} from 'react'
 import '../src/style/style.css'
 import Button from './Components/Button';
+import { FilterAndSearch } from './Components/FilterAndSearch';
 import InformForm from './Components/InformForm';
 import Input from './Components/Input';
 import TableHeader from './Components/TableHeader';
@@ -38,6 +39,7 @@ function App() {
   }
   const [select,setSelect]=useState('');
   const [search,setSearch]=useState('');
+  const [filter,setFilter]=useState({sort:'',query:''})
   // const addPost=(e)=>{
   //   e.preventDefault();
   //   const newPost={
@@ -59,47 +61,29 @@ function App() {
   // }
   const  SortedInform=useMemo(()=>{
     // console.log("first")
-    if(select){
-      return [...informs].sort((a,b)=>a[select].localeCompare(b[select]))
+    if(filter.sort){
+      return [...informs].sort((a,b)=>a[filter.sort].localeCompare(b[filter.sort]))
     }
     return informs
-  },[select,informs])
+  },[filter.sort,informs])
   const sortedSearchAndInform=useMemo(()=>{
-      return SortedInform.filter(inform=>inform.firstname.toLowerCase().includes(search.toLowerCase()))
-  },[search,SortedInform])
-  const sortSelect=(sort)=>{
-    setSelect(sort);
-    // console.log(sort);
-    setInforms([...informs].sort((a,b)=>a[sort].localeCompare(b[sort])))
-    // setInforms([...informs].sort((a,b)=>a[sort].localeCompare(b[sort])))
+      return SortedInform.filter(inform=>inform.firstname.toLowerCase().includes(filter.query.toLowerCase()))
+  },[filter.query,SortedInform])
+  // const sortSelect=(sort)=>{
+  //   setSelect(sort);
+  //   // console.log(sort);
+  //   setInforms([...informs].sort((a,b)=>a[sort].localeCompare(b[sort])))
+  //   // setInforms([...informs].sort((a,b)=>a[sort].localeCompare(b[sort])))
 
-  }
+  // }
   return (
     <>
     <div className="app px-3 my-5 ">
       <InformForm createInform={createInform}/>
-      <div className='d-flex justify-content-between align-items-center my-3 text-right'>
-        <MyInput 
-        placeholder="Search for type..."
-        value={search}
-        onChange={e=>setSearch(e.target.value)}
-
-        />
-         <MySelect 
-         value={select}
-         onChange={sortSelect}
-         defaultValues="Sorted by"
-         options={[
-           {value:"firstname",name:'Firstnames'},
-           {value:"jobs",name:'Jobs'}
-         ]}
-         />
-      </div>
-      {sortedSearchAndInform.length?
+      <FilterAndSearch filter={filter} setFilter={setFilter}/>
       <TableList remove={removeInform} informse={sortedSearchAndInform} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
-      :
-      <h2 className='text-center my-5 text-danger'>Worker inform don't found!.</h2>
-      }
+      
+      
     </div>
   
     </>
