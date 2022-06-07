@@ -1,4 +1,4 @@
-import React,{useState,useRef} from 'react'
+import React,{useState,useRef, useMemo} from 'react'
 import '../src/style/style.css'
 import Button from './Components/Button';
 import InformForm from './Components/InformForm';
@@ -57,14 +57,16 @@ function App() {
     // setEmailAddress("");
     // console.log(name);
   // }
-  function getSortedInform(){
-    console.log("first")
+  const  SortedInform=useMemo(()=>{
+    // console.log("first")
     if(select){
-      return [...informs].sort((a,b)=>a[select].localeCompare(b[select]));
+      return [...informs].sort((a,b)=>a[select].localeCompare(b[select]))
     }
-    return informs;
-  }
-  const sortedInform=getSortedInform();
+    return informs
+  },[select,informs])
+  const sortedSearchAndInform=useMemo(()=>{
+      return SortedInform.filter(inform=>inform.firstname.toLowerCase().includes(search.toLowerCase()))
+  },[search,SortedInform])
   const sortSelect=(sort)=>{
     setSelect(sort);
     // console.log(sort);
@@ -93,8 +95,8 @@ function App() {
          ]}
          />
       </div>
-      {informs.length?
-      <TableList remove={removeInform} informse={sortedInform} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
+      {sortedSearchAndInform.length?
+      <TableList remove={removeInform} informse={sortedSearchAndInform} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
       :
       <h2 className='text-center my-5 text-danger'>Worker inform don't found!.</h2>
       }
