@@ -19,20 +19,23 @@ const TableItem = (props) => {
         //       <button className='btn btn-outline-success mx-3'>Edit</button>
         //     </td>
         //   </tr>
-          <tr>
-            <td>{props.number}</td>
-            <td>{props.inform.firstname}</td>
-            <td>{props.inform.surname}</td>
-            <td>{props.inform.jobs}</td>
-            <td>{props.inform.years}</td>
-            <td>{props.inform.address}</td>
-            <td>{props.inform.emailAddress}</td>
+        <div className='d-flex justify-content-between p-2 my-2'>
+         
+            <p className='td'>{props.number}</p>
+            <p className='td'>{props.inform.firstname}</p>
+            <p className='td'>{props.inform.surname}</p>
+            <p className='td'>{props.inform.jobs}</p>
+            <p className='td'>{props.inform.years}</p>
+            <p className='td'>{props.inform.address}</p>
+            <p className='td'>{props.inform.emailAddress}</p>
             
-            <td>
+            <p className='td'>
               <button onClick={()=>props.remove(props.inform)}  className='btn btn-outline-danger'>Delete</button>
               <button disabled className='btn btn-outline-success mx-3'>Edit</button>
-            </td>
-          </tr>
+            </p>
+         
+        </div>
+
    
    
   )

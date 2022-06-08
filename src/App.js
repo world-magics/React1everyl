@@ -19,9 +19,6 @@ function App() {
   {id:3, firstname:'vsAli',surname:"valiyev",jobs:"jData Analayzer",years:27,address:"Uzbekistan, Tashkent city Amir Temur Street 104 home",emailAddress:"rayaSoft12OfficeConnect@gmail.com"},
   {id:4, firstname:'rAli',surname:"valiyev",jobs:"vData Analayzer",years:27,address:"Uzbekistan, Tashkent city Amir Temur Street 104 home",emailAddress:"rayaSoft12OfficeConnect@gmail.com"},
   {id:5, firstname:'dAli',surname:"valiyev",jobs:"bData Analayzer",years:27,address:"Uzbekistan, Tashkent city Amir Temur Street 104 home",emailAddress:"rayaSoft12OfficeConnect@gmail.com"},
-  {id:6, firstname:'gAli',surname:"valiyev",jobs:"nData Analayzer",years:27,address:"Uzbekistan, Tashkent city Amir Temur Street 104 home",emailAddress:"rayaSoft12OfficeConnect@gmail.com"},
-  {id:7, firstname:'bAli',surname:"valiyev",jobs:"aData Analayzer",years:27,address:"Uzbekistan, Tashkent city Amir Temur Street 104 home",emailAddress:"rayaSoft12OfficeConnect@gmail.com"},
-  {id:8, firstname:'hAli',surname:"valiyev",jobs:"Data Analayzer",years:27,address:"Uzbekistan, Tashkent city Amir Temur Street 104 home",emailAddress:"rayaSoft12OfficeConnect@gmail.com"} 
   ])
   // const [firstname,setName]=useState("");
   // const [surname,setSurname]=useState("");

@@ -9,3 +9,26 @@
 .text{
     text-indent: 1.5em;
 }
+.remove-btn {
+    margin-right: 0.5rem;
+  }
+  
+  .item-enter {
+    /* opacity: 0; */
+    transform: translateX(-350px);
+  }
+  .item-enter-active {
+    /* opacity: 1; */
+    transform: translateX(0px);
+
+    transition: all 500ms ease-in;
+  }
+  .item-exit {
+    opacity: 1;
+  }
+  .item-exit-active {
+    /* opacity: 0; */
+    transform: translateX(-350px);
+    transition: all 500ms ease-in;
+  }
+  
