@@ -10,6 +10,7 @@ import TableList from './Components/TableList';
 import ToggleBtn from './Components/ToggleBtn';
 import MyButton from './Components/UI/button/MyButton';
 import MyInput from './Components/UI/input/MyInput';
+import MyModal from './Components/UI/modal/MyModal';
 import MySelect from './Components/UI/select/MySelect';
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
  
   const createInform=(newInform)=>{
     setInforms([...informs,newInform])
+    setModal(false)
   }
   const removeInform=(inform)=>{
       setInforms(informs.filter(s=>s.id!==inform.id))
@@ -37,6 +39,7 @@ function App() {
   const [select,setSelect]=useState('');
   const [search,setSearch]=useState('');
   const [filter,setFilter]=useState({sort:'',query:''})
+  const [modal,setModal]=useState(false);
   // const addPost=(e)=>{
   //   e.preventDefault();
   //   const newPost={
@@ -75,8 +78,11 @@ function App() {
   // }
   return (
     <>
-    <div className="app px-3 my-5 ">
+    <div className="app px-3 my-5 py-3 ">
+      <MyButton onClick={()=>setModal(true)} className="btn btn-outline-success w-100">Add Inform Workers</MyButton>
+      <MyModal modal={modal} setModal={setModal}>
       <InformForm createInform={createInform}/>
+      </MyModal>
       <FilterAndSearch filter={filter} setFilter={setFilter}/>
       <TableList remove={removeInform} informse={sortedSearchAndInform} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
       

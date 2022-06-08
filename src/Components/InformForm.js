@@ -63,7 +63,7 @@ const InformForm = ({createInform}) => {
     onChange={e=>setInform({...inform,emailAddress:e.target.value})}
     />
   
-    <MyButton  onClick={addInforms} >Add Worker Information</MyButton>  
+    <MyButton className='btn btn-outline-success w-100 '  onClick={addInforms} >Add Worker Information</MyButton>  
     </form>
   )
 }
