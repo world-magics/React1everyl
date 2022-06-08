@@ -12,6 +12,7 @@ import MyButton from './Components/UI/button/MyButton';
 import MyInput from './Components/UI/input/MyInput';
 import MyModal from './Components/UI/modal/MyModal';
 import MySelect from './Components/UI/select/MySelect';
+import { useInforms } from './hooks/useCreateInform';
 function App() {
   
   const [informs,setInforms]=useState([
@@ -40,6 +41,7 @@ function App() {
   const [search,setSearch]=useState('');
   const [filter,setFilter]=useState({sort:'',query:''})
   const [modal,setModal]=useState(false);
+  const sortedAndSearchInforms=useInforms(informs,filter.sort,filter.query)
   // const addPost=(e)=>{
   //   e.preventDefault();
   //   const newPost={
@@ -59,16 +61,16 @@ function App() {
     // setEmailAddress("");
     // console.log(name);
   // }
-  const  SortedInform=useMemo(()=>{
-    // console.log("first")
-    if(filter.sort){
-      return [...informs].sort((a,b)=>a[filter.sort].localeCompare(b[filter.sort]))
-    }
-    return informs
-  },[filter.sort,informs])
-  const sortedSearchAndInform=useMemo(()=>{
-      return SortedInform.filter(inform=>inform.firstname.toLowerCase().includes(filter.query.toLowerCase()))
-  },[filter.query,SortedInform])
+  // const  SortedInform=useMemo(()=>{
+  //   // console.log("first")
+  //   if(filter.sort){
+  //     return [...informs].sort((a,b)=>a[filter.sort].localeCompare(b[filter.sort]))
+  //   }
+  //   return informs
+  // },[filter.sort,informs])
+  // const sortedSearchAndInform=useMemo(()=>{
+  //     return SortedInform.filter(inform=>inform.firstname.toLowerCase().includes(filter.query.toLowerCase()))
+  // },[filter.query,SortedInform])
   // const sortSelect=(sort)=>{
   //   setSelect(sort);
   //   // console.log(sort);
@@ -84,7 +86,7 @@ function App() {
       <InformForm createInform={createInform}/>
       </MyModal>
       <FilterAndSearch filter={filter} setFilter={setFilter}/>
-      <TableList remove={removeInform} informse={sortedSearchAndInform} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
+      <TableList remove={removeInform} informse={sortedAndSearchInforms} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
       
       
     </div>
