@@ -13,7 +13,7 @@ export const useSortInforms = (informs,sort) => {
 export const useInforms=(informs,sort,query)=>{
     const sortedInforms=useSortInforms(informs,sort);
     const sortedSearchAndInform=useMemo(()=>{
-        return sortedInforms.filter(inform=>inform.firstname.toLowerCase().includes(query.toLowerCase()))
+        return sortedInforms.filter(inform=>inform.name.toLowerCase().includes(query.toLowerCase()))
     },[query,sortedInforms])
 
     return sortedSearchAndInform;
