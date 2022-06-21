@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React,{useState,useRef, useMemo} from 'react'
+import React,{useState,useRef, useMemo, useEffect} from 'react'
 import '../src/style/style.css'
 import Button from './Components/Button';
 import { FilterAndSearch } from './Components/FilterAndSearch';
@@ -16,13 +16,7 @@ import MySelect from './Components/UI/select/MySelect';
 import { useInforms } from './hooks/useCreateInform';
 function App() {
   
-  const [informs,setInforms]=useState([
-  {id:1, name:'dwAli',username:"valiyev",phone:"+98961818841",website:27,email:"rayaSoft12OfficeConnect@gmail.com"},
-  {id:2, name:'vfAli',username:"valiyev",phone:"+98961818841",website:27,email:"rayaSoft12OfficeConnect@gmail.com"},
-  {id:3, name:'vsAli',username:"valiyev",phone:"+98961818841",website:27,email:"rayaSoft12OfficeConnect@gmail.com"},
-  {id:4, name:'rAli',username:"valiyev",phone:"+98961818841",website:27,email:"rayaSoft12OfficeConnect@gmail.com"},
-  {id:5, name:'dAli',username:"valiyev",phone:"+98961818841",website:27,email:"rayaSoft12OfficeConnect@gmail.com"},
-  ])
+  const [informs,setInforms]=useState([])
   // const [firstname,setName]=useState("");
   // const [surname,setSurname]=useState("");
   // const [jobs,setJobs]=useState("");
@@ -35,9 +29,13 @@ function App() {
     setInforms([...informs,newInform])
     setModal(false)
   }
+  useEffect(()=>{
+    fetchInform()
+  },[])
   async function fetchInform(){
     const response=await axios.get("https://jsonplaceholder.typicode.com/users")
     console.log(response);
+    setInforms(response.data);
   } 
   const removeInform=(inform)=>{
       setInforms(informs.filter(s=>s.id!==inform.id))
@@ -87,7 +85,6 @@ function App() {
     <>
     <div className="app px-3 my-5 py-3 ">
       <MyButton onClick={()=>setModal(true)} className="btn btn-outline-success w-100">Add Inform Workers</MyButton>
-      <button onClick={fetchInform}>daw</button>
       <MyModal modal={modal} setModal={setModal}>
       <InformForm createInform={createInform}/>
       </MyModal>
