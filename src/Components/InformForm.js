@@ -3,7 +3,7 @@ import MyButton from './UI/button/MyButton'
 import MyInput from './UI/input/MyInput'
 
 const InformForm = ({createInform}) => {
-  const [inform,setInform]=useState({firstname:'',surname:'',jobs:'',years:'',address:'',emailAddress:''});
+  const [inform,setInform]=useState({name:'',username:'',phone:'',website:'',email:''});
   const addInforms=(e)=>{
     e.preventDefault();
     // setInforms([...informs,{...inform,id:Date.now()}])
@@ -13,7 +13,7 @@ const InformForm = ({createInform}) => {
 
     }
     createInform(newInform)
-    setInform({firstname:' ',surname:'',jobs:'',years:'',address:'',emailAddress:''});
+    setInform({name:'',username:'',phone:'',website:'',email:''});
 
   }
   return (
@@ -23,46 +23,39 @@ const InformForm = ({createInform}) => {
     type="text"  
     className='form-control mt-3 mr-3' 
     placeholder='Enter the name.'
-    value={inform.firstname}
-    onChange={e=>setInform({...inform,firstname: e.target.value})}
+    value={inform.name}
+    onChange={e=>setInform({...inform,name: e.target.value})}
     
     />
     <MyInput 
     type="text"  
     className='form-control mt-3 mr-3' 
-    placeholder='Enter the surname.'
-    value={inform.surname}
-    onChange={e=>setInform({...inform,surname:e.target.value})}
+    placeholder='Enter the username.'
+    value={inform.username}
+    onChange={e=>setInform({...inform,username:e.target.value})}
     />
     <MyInput 
     type="text"  
     className='form-control mt-3 mr-3' 
-    placeholder='Enter the jobs.'
-    value={inform.jobs}
-    onChange={e=>setInform({...inform,jobs:e.target.value})}
+    placeholder='Enter the phone'
+    value={inform.phone}
+    onChange={e=>setInform({...inform,phone:e.target.value})}
     />
     <MyInput 
-    type="number"
+    type="text"
     className='form-control mt-3 mr-3' 
-    placeholder='Enter the years.'
+    placeholder='Enter the website.'
     value={inform.years}
-    onChange={e=>setInform({...inform,years:e.target.value})}
+    onChange={e=>setInform({...inform,website:e.target.value})}
     />
     <MyInput 
-    type="text"  
+    type="email"  
     className='form-control mt-3 mr-3' 
-    placeholder='Enter the address.'
-    value={inform.address}
-    onChange={e=>setInform({...inform,address:e.target.value})}
+    placeholder='Enter the email.'
+    value={inform.email}
+    onChange={e=>setInform({...inform,email:e.target.value})}
     />
-    <MyInput 
-    type="text"  
-    className='form-control mt-3 mb-3 mr-3' 
-    placeholder='Enter the email address.'
-    value={inform.emailAddress}
-    onChange={e=>setInform({...inform,emailAddress:e.target.value})}
-    />
-  
+   
     <MyButton className='btn btn-outline-success w-100 '  onClick={addInforms} >Add Worker Information</MyButton>  
     </form>
   )

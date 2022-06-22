@@ -6,7 +6,7 @@ const TableItem = (props) => {
     
         <div className='d-flex justify-content-between p-2 my-2'>
          
-            <p>{props.number}</p>
+            <p>{props.inform.id}</p>
             <p>{props.inform.name}</p>
             <p>{props.inform.username}</p>
             <p>{props.inform.phone}</p>

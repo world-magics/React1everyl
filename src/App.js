@@ -14,9 +14,11 @@ import MyButton from './Components/UI/button/MyButton';
 import MyInput from './Components/UI/input/MyInput';
 import MyLoader from './Components/UI/loader/MyLoader';
 import MyModal from './Components/UI/modal/MyModal';
+import MyPagination from './Components/UI/pagination/MyPagination';
 import MySelect from './Components/UI/select/MySelect';
 import { useInforms } from './hooks/useCreateInform';
 import { useFetching } from './hooks/useFetching';
+import { getPageArray, getPageCount } from './utils/pages';
 function App() {
   
   const [informs,setInforms]=useState([])
@@ -32,9 +34,7 @@ function App() {
     setInforms([...informs,newInform])
     setModal(false)
   }
-  useEffect(()=>{
-    fetchInform()
-  },[])
+ 
   // async function fetchInform(){
 
   //   setIsLoading(true)
@@ -51,11 +51,26 @@ function App() {
   const [filter,setFilter]=useState({sort:'',query:''})
   const [modal,setModal]=useState(false);
   const sortedAndSearchInforms=useInforms(informs,filter.sort,filter.query)
-
-  const [fetchInform,isLoading,informError]=useFetching(async ()=>{
-    const informs= await InformServiceApi.getAllInforms()
-    setInforms(informs)
+  const [totalPage,setTotalPage]=useState(0)
+  const [limit,setLimit]=useState(5)
+  const [page,setPage]=useState(1)
+ 
+  // console.log(pageArray)
+    const [fetchInform,isLoading,informError]=useFetching(async (limit,page)=>{
+    const response= await InformServiceApi.getAllInforms(limit,page)
+    setInforms(response.data)
+    const totalCount=response.headers['x-total-count']
+    setTotalPage(getPageCount(totalCount,limit))
   })
+
+  useEffect(()=>{
+    fetchInform(limit,page)
+  },[])
+  const changePage=(page)=>{
+    setPage(page)
+    fetchInform(limit,page)
+  }
+  // console.log(totalPage)
   // const addPost=(e)=>{
   //   e.preventDefault();
   //   const newPost={
@@ -100,14 +115,15 @@ function App() {
       <InformForm createInform={createInform}/>
       </MyModal>
       <FilterAndSearch filter={filter} setFilter={setFilter}/>
-      {informError?<p>xatolik</p>:<p>tugri</p>}
+      {/* {informError?<p>xatolik</p>:<p>tugri</p>} */}
       {isLoading
       ?
       <div className='loadercenter'><MyLoader/></div> 
       :
       <TableList remove={removeInform} informse={sortedAndSearchInforms} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
       }
-      
+    
+      <MyPagination page={page} changePage={changePage} totalPage={totalPage}/>
     </div>
   
     </>

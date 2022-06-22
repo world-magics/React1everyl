@@ -1,9 +1,14 @@
 import axios from "axios";
 
 class InformServiceApi{
-    static async getAllInforms(){
-    const response=await axios.get("https://jsonplaceholder.typicode.com/users")
-        return response.data
+    static async getAllInforms(limit=5,page=1){
+    const response=await axios.get("https://jsonplaceholder.typicode.com/users",{
+        params:{
+            _limit:limit,
+            _page:page
+        }
+    })
+        return response
     }
 }
 
