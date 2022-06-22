@@ -16,6 +16,7 @@ import MyLoader from './Components/UI/loader/MyLoader';
 import MyModal from './Components/UI/modal/MyModal';
 import MySelect from './Components/UI/select/MySelect';
 import { useInforms } from './hooks/useCreateInform';
+import { useFetching } from './hooks/useFetching';
 function App() {
   
   const [informs,setInforms]=useState([])
@@ -26,7 +27,6 @@ function App() {
   // const [address,setAddress]=useState("");
   // const [emailAddress,setEmailAddress]=useState("");
   // object sifatifa berb yuborish usestatga
-  const [isLoading,setIsLoading]=useState(false)
  
   const createInform=(newInform)=>{
     setInforms([...informs,newInform])
@@ -35,14 +35,14 @@ function App() {
   useEffect(()=>{
     fetchInform()
   },[])
-  async function fetchInform(){
+  // async function fetchInform(){
 
-    setIsLoading(true)
-        const informs=await InformServiceApi.getAllInforms()
-    // // console.log(response);
-    setInforms(informs);
-    setIsLoading(false)
-  } 
+  //   setIsLoading(true)
+  //       const informs=await InformServiceApi.getAllInforms()
+  //   // // console.log(response);
+  //   setInforms(informs);
+  //   setIsLoading(false)
+  // } 
   const removeInform=(inform)=>{
       setInforms(informs.filter(s=>s.id!==inform.id))
   }
@@ -51,6 +51,11 @@ function App() {
   const [filter,setFilter]=useState({sort:'',query:''})
   const [modal,setModal]=useState(false);
   const sortedAndSearchInforms=useInforms(informs,filter.sort,filter.query)
+
+  const [fetchInform,isLoading,informError]=useFetching(async ()=>{
+    const informs= await InformServiceApi.getAllInforms()
+    setInforms(informs)
+  })
   // const addPost=(e)=>{
   //   e.preventDefault();
   //   const newPost={
@@ -95,7 +100,7 @@ function App() {
       <InformForm createInform={createInform}/>
       </MyModal>
       <FilterAndSearch filter={filter} setFilter={setFilter}/>
-      
+      {informError?<p>xatolik</p>:<p>tugri</p>}
       {isLoading
       ?
       <div className='loadercenter'><MyLoader/></div> 
