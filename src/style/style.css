@@ -1,7 +1,7 @@
 .app{
     /* background-color: aliceblue; */
     margin: 40px auto;
-    width: 90%;
+    width: 100%;
     border:1px solid #777;
     box-shadow: 1px 4px 7px rgba(0,0,0,.5);
     height: 140vh;
@@ -31,4 +31,9 @@
     transform: translateX(-350px);
     transition: all 500ms ease-in;
   }
-  
+  .loadercenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+  }

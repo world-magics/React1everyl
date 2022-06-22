@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React,{useState,useRef, useMemo, useEffect} from 'react'
 import '../src/style/style.css'
+import InformServiceApi from './API/InformServiceApi';
 import Button from './Components/Button';
 import { FilterAndSearch } from './Components/FilterAndSearch';
 import InformForm from './Components/InformForm';
@@ -11,6 +12,7 @@ import TableList from './Components/TableList';
 import ToggleBtn from './Components/ToggleBtn';
 import MyButton from './Components/UI/button/MyButton';
 import MyInput from './Components/UI/input/MyInput';
+import MyLoader from './Components/UI/loader/MyLoader';
 import MyModal from './Components/UI/modal/MyModal';
 import MySelect from './Components/UI/select/MySelect';
 import { useInforms } from './hooks/useCreateInform';
@@ -24,6 +26,7 @@ function App() {
   // const [address,setAddress]=useState("");
   // const [emailAddress,setEmailAddress]=useState("");
   // object sifatifa berb yuborish usestatga
+  const [isLoading,setIsLoading]=useState(false)
  
   const createInform=(newInform)=>{
     setInforms([...informs,newInform])
@@ -33,9 +36,12 @@ function App() {
     fetchInform()
   },[])
   async function fetchInform(){
-    const response=await axios.get("https://jsonplaceholder.typicode.com/users")
-    console.log(response);
-    setInforms(response.data);
+
+    setIsLoading(true)
+        const informs=await InformServiceApi.getAllInforms()
+    // // console.log(response);
+    setInforms(informs);
+    setIsLoading(false)
   } 
   const removeInform=(inform)=>{
       setInforms(informs.filter(s=>s.id!==inform.id))
@@ -89,8 +95,13 @@ function App() {
       <InformForm createInform={createInform}/>
       </MyModal>
       <FilterAndSearch filter={filter} setFilter={setFilter}/>
-      <TableList remove={removeInform} informse={sortedAndSearchInforms} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
       
+      {isLoading
+      ?
+      <div className='loadercenter'><MyLoader/></div> 
+      :
+      <TableList remove={removeInform} informse={sortedAndSearchInforms} title={"Uzbekistan, Tashkent Shop Managment System Info"}/>
+      }
       
     </div>
   
